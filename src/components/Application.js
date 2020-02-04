@@ -3,16 +3,17 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Application.css';
 
-// Add a new item 
-function Item ({ addItem }) {
+// Create a create new task component
+function CreateTask ({ addTask }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState('PENDING')
   const [dueDate, setDueDate] = useState('')
   // const [showForm, setShowForm] = useState(false)
 
   const handleSubmit = function(evt) {
     evt.preventDefault()
+    addTask(title, description, status, dueDate)
   }
 
   const handleTitleChange = e => {
@@ -23,6 +24,8 @@ function Item ({ addItem }) {
     setDescription(e.target.value)
   }
 
+  // Status can either be PENDING or COMPLETE
+  // Changed initial state to PENDING
   const handleStatusChange = e => {
     setStatus(e.target.value)
   }
@@ -84,7 +87,7 @@ function Task({ task }) {
     return (
         <div
             className="task"
-            style={{ textDecoration: task.completed ? "line-through" : "" }}
+            style={{ textDecoration: task.status === "Complete" ? "line-through" : "" }}
         >
             {task.title}
         </div>
@@ -92,21 +95,33 @@ function Task({ task }) {
 }
 
 export default function Todo() {
-  const [showForm, setShowForm] = useState(false)
+  // const [showForm, setShowForm] = useState(false)
   const [tasks, setTasks] = useState([
       {
-          title: "Grab some Pizza",
-          completed: true
+        title: "Eat",
+        description: "Order Pizza",
+        status: "Complete",
+        due_date: Date("2020-01-31")
       },
       {
-          title: "Do your workout",
-          completed: true
+        title: "Homework",
+        description: "Read chapters 1-3",
+        status: "Complete",
+        due_date: Date("2020-01-31")
       },
       {
-          title: "Hangout with friends",
-          completed: false
+        title: "Workout",
+        description: "Go to yoga",
+        status: "Pending",
+        due_date: Date("2020-02-05")
       }
   ]);
+
+  const addTask = function(title, description, status, due_date) {
+    const newTask = [...tasks, {title, description, status, due_date}]
+    setTasks(newTask)
+  }
+
   return (
       <div className="todo-container">
           <div className="header">THINGS TO DO</div>
@@ -119,12 +134,15 @@ export default function Todo() {
                   />
               ))}
           </div>
-          <div>
+          {/* <div>
             <Button variant="contained" onClick={()=> setShowForm(true)}>
               Create
             </Button>
           </div>
-            {showForm ? <Item setShowForm={setShowForm} /> : ""}
+            {showForm ? <Item setShowForm={setShowForm} /> : ""} */}
+          <div className="create-task">
+            <CreateTask addTask={addTask} />
+          </div>
       </div>
   );
 }
