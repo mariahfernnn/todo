@@ -10,9 +10,21 @@ function addItem() {
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('')
   const [dueDate, setDueDate] = useState('')
-
+  
   const handleTitleChange = e => {
     setTitle(e.target.value)
+  }
+
+  const handleDescriptionChange = e => {
+    setDescription(e.target.value)
+  }
+
+  const handleStatusChange = e => {
+    setStatus(e.target.value)
+  }
+
+  const handleDueDateChange = e => {
+    setDueDate(e.target.value)
   }
 
   return (
