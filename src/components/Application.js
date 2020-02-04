@@ -9,6 +9,7 @@ function Item ({ addItem }) {
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('')
   const [dueDate, setDueDate] = useState('')
+  // const [showForm, setShowForm] = useState(false)
 
   const handleSubmit = function(evt) {
     evt.preventDefault()
@@ -67,7 +68,10 @@ function Item ({ addItem }) {
         />
       </div>
       <div>
-        <Button variant="outlined" type="submit">
+        {/* <Button variant="contained" onClick={() => setShowForm(false)}>
+          Cancel
+        </Button> */}
+        <Button variant="contained" type="submit">
           Submit
         </Button> 
       </div>
@@ -75,6 +79,7 @@ function Item ({ addItem }) {
   )
 }
 
+// TEST CODE
 function Task({ task }) {
     return (
         <div
@@ -87,36 +92,41 @@ function Task({ task }) {
 }
 
 export default function Todo() {
-    const [showForm, setShowForm] = useState(false)
-    const [tasks, setTasks] = useState([
-        {
-            title: "Grab some Pizza",
-            completed: true
-        },
-        {
-            title: "Do your workout",
-            completed: true
-        },
-        {
-            title: "Hangout with friends",
-            completed: false
-        }
-    ]);
-    return (
-        <div className="todo-container">
-            <div className="header">THINGS TO DO</div>
-            <div className="tasks">
-                {tasks.map((task, index) => (
-                    <Task
-                        task={task}
-                        index={index}
-                        key={index}
-                    />
-                ))}
-            </div>
-            <div>
-              <Item onClick={()=> setShowForm(true)} />
-            </div>
-        </div>
-    );
+  const [showForm, setShowForm] = useState(false)
+  const [tasks, setTasks] = useState([
+      {
+          title: "Grab some Pizza",
+          completed: true
+      },
+      {
+          title: "Do your workout",
+          completed: true
+      },
+      {
+          title: "Hangout with friends",
+          completed: false
+      }
+  ]);
+  return (
+      <div className="todo-container">
+          <div className="header">THINGS TO DO</div>
+          <div className="tasks">
+              {tasks.map((task, index) => (
+                  <Task
+                      task={task}
+                      index={index}
+                      key={index}
+                  />
+              ))}
+          </div>
+          <div>
+            <Button variant="contained" onClick={()=> setShowForm(true)}>
+              Create
+            </Button>
+          </div>
+            {showForm ? <Item setShowForm={setShowForm} /> : ""}
+      </div>
+  );
 }
+
+// onClick={()=> setShowForm(true)}
