@@ -2,15 +2,20 @@
 
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import './Application.css';
 
 // Add a new item 
-function addItem() {
+function Item ({ addItem }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('')
   const [dueDate, setDueDate] = useState('')
-  
+
+  const handleSubmit = function(evt) {
+    evt.preventDefault()
+  }
+
   const handleTitleChange = e => {
     setTitle(e.target.value)
   }
@@ -28,7 +33,7 @@ function addItem() {
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <TextField
           required
@@ -63,20 +68,26 @@ function addItem() {
           value={dueDate}
         />
       </div>
+      <div>
+        <Button variant="outlined" type="submit">
+          Submit
+        </Button> 
+      </div>
     </form>
   )
 }
 
-// function Task({ task }) {
-//     return (
-//         <div
-//             className="task"
-//             style={{ textDecoration: task.completed ? "line-through" : "" }}
-//         >
-//             {task.title}
-//         </div>
-//     );
-// }
+function Task({ task }) {
+    return (
+        <div
+            className="task"
+            style={{ textDecoration: task.completed ? "line-through" : "" }}
+        >
+            {task.title}
+        </div>
+    );
+}
+
 export default function Todo() {
     const [tasks, setTasks] = useState([
         {
@@ -103,6 +114,9 @@ export default function Todo() {
                         key={index}
                     />
                 ))}
+            </div>
+            <div>
+              <Item />
             </div>
         </div>
     );
