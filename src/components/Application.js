@@ -1,18 +1,43 @@
 // TEST CODE
 
 import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
 import './Application.css';
 
-function Task({ task }) {
-    return (
-        <div
-            className="task"
-            style={{ textDecoration: task.completed ? "line-through" : "" }}
-        >
-            {task.title}
-        </div>
-    );
+// Add a new item 
+function addItem() {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [status, setStatus] = useState('')
+  const [dueDate, setDueDate] = useState('')
+
+  return (
+    <form>
+      <div>
+      <TextField
+          required
+          id="title"
+          label="Title"
+          className={classes.textField}
+          margin="normal"
+          onChange={handleTitleChange}
+          value={title}
+        />
+      </div>
+    </form>
+  )
 }
+
+// function Task({ task }) {
+//     return (
+//         <div
+//             className="task"
+//             style={{ textDecoration: task.completed ? "line-through" : "" }}
+//         >
+//             {task.title}
+//         </div>
+//     );
+// }
 export default function Todo() {
     const [tasks, setTasks] = useState([
         {
