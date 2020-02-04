@@ -1,5 +1,3 @@
-// TEST CODE
-
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -89,6 +87,7 @@ function Task({ task }) {
 }
 
 export default function Todo() {
+    const [showForm, setShowForm] = useState(false)
     const [tasks, setTasks] = useState([
         {
             title: "Grab some Pizza",
@@ -116,7 +115,7 @@ export default function Todo() {
                 ))}
             </div>
             <div>
-              <Item />
+              <Item onClick={()=> setShowForm(true)} />
             </div>
         </div>
     );
