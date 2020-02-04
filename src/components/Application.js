@@ -11,17 +11,44 @@ function addItem() {
   const [status, setStatus] = useState('')
   const [dueDate, setDueDate] = useState('')
 
+  const handleTitleChange = e => {
+    setTitle(e.target.value)
+  }
+
   return (
     <form>
       <div>
-      <TextField
+        <TextField
           required
           id="title"
           label="Title"
-          className={classes.textField}
           margin="normal"
           onChange={handleTitleChange}
           value={title}
+        />
+        <TextField
+          required
+          id="description"
+          label="Description"
+          margin="normal"
+          onChange={handleDescriptionChange}
+          value={description}
+        />
+        <TextField
+          required
+          id="status"
+          label="Status"
+          margin="normal"
+          onChange={handleStatusChange}
+          value={status}
+        />
+        <TextField
+          required
+          id="dueDate"
+          label="Due Date"
+          margin="normal"
+          onChange={handleDueDateChange}
+          value={dueDate}
         />
       </div>
     </form>
