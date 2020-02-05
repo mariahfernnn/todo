@@ -9,7 +9,6 @@ function CreateTask ({ addTask }) {
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('PENDING')
   const [dueDate, setDueDate] = useState('')
-  // const [showForm, setShowForm] = useState(false)
 
   const handleSubmit = function(evt) {
     evt.preventDefault()
@@ -24,8 +23,9 @@ function CreateTask ({ addTask }) {
     setDescription(e.target.value)
   }
 
-  // Status can either be PENDING or COMPLETE
+  // Status can either be PENDING or DONE
   // Changed initial state to PENDING
+  // Make it a dropdown later
   const handleStatusChange = e => {
     setStatus(e.target.value)
   }
@@ -36,7 +36,7 @@ function CreateTask ({ addTask }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className="create-task">
         <TextField
           required
           id="title"
@@ -71,9 +71,6 @@ function CreateTask ({ addTask }) {
         />
       </div>
       <div>
-        {/* <Button variant="contained" onClick={() => setShowForm(false)}>
-          Cancel
-        </Button> */}
         <Button variant="contained" type="submit">
           Submit
         </Button> 
@@ -87,7 +84,7 @@ function Task({ task }) {
     return (
         <div
             className="task"
-            style={{ textDecoration: task.status === "Complete" ? "line-through" : "" }}
+            style={{ textDecoration: task.status === "DONE" ? "line-through" : "" }}
         >
             {task.title}
         </div>
@@ -95,24 +92,24 @@ function Task({ task }) {
 }
 
 export default function Todo() {
-  // const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(false)
   const [tasks, setTasks] = useState([
       {
         title: "Eat",
         description: "Order Pizza",
-        status: "Complete",
+        status: "DONE",
         due_date: Date("2020-01-31")
       },
       {
         title: "Homework",
         description: "Read chapters 1-3",
-        status: "Complete",
+        status: "DONE",
         due_date: Date("2020-01-31")
       },
       {
         title: "Workout",
         description: "Go to yoga",
-        status: "Pending",
+        status: "PENDING",
         due_date: Date("2020-02-05")
       }
   ]);
@@ -120,29 +117,39 @@ export default function Todo() {
   const addTask = function(title, description, status, due_date) {
     const newTask = [...tasks, {title, description, status, due_date}]
     setTasks(newTask)
+    setShowForm(false)
   }
 
   return (
-      <div className="todo-container">
+    <div className="todo-container">
           <div className="header">THINGS TO DO</div>
-          <div className="tasks">
+          {/* <div className="tasks">
               {tasks.map((task, index) => (
-                  <Task
-                      task={task}
-                      index={index}
-                      key={index}
-                  />
-              ))}
-          </div>
-          {/* <div>
+                <Task
+                task={task}
+                index={index}
+                key={index}
+                />
+                ))}
+          </div> */}
+          <div>
             <Button variant="contained" onClick={()=> setShowForm(true)}>
               Create
             </Button>
+            <Button variant="contained" onClick={() => setShowForm(false)}>
+              Close
+            </Button>
           </div>
-            {showForm ? <Item setShowForm={setShowForm} /> : ""} */}
-          <div className="create-task">
-            <CreateTask addTask={addTask} />
-          </div>
+          {showForm ? <CreateTask setShowForm={setShowForm} addTask={addTask} /> : 
+          <div className="tasks">
+            {tasks.map((task, index) => (
+              <Task
+              task={task}
+              index={index}
+              key={index}
+              />
+            ))}
+          </div>}
       </div>
   );
 }
