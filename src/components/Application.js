@@ -156,11 +156,12 @@ export default function Todo() {
             <Button variant="contained" onClick={()=> setShowForm(true)}>
               Create
             </Button>
-            <Button variant="contained" onClick={() => setShowForm(false)}>
+            {/* <Button variant="contained" onClick={() => setShowForm(false)}>
               Back
-            </Button>
+            </Button> */}
           </div>
-          {showForm ? <CreateTask setShowForm={setShowForm} addTask={addTask} /> : 
+          {showForm ? 
+          <CreateTask setShowForm={setShowForm} addTask={addTask}/> : 
           <div className="tasks">
             {tasks.map((task, index) => (
               <Task
@@ -169,7 +170,7 @@ export default function Todo() {
               key={index}
               completeTask={completeTask}
               />
-              ))}
+            ))}
           </div>}
       </div>
   );
