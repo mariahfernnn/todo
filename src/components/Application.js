@@ -43,6 +43,7 @@ function CreateTask ({ addTask }) {
           id="title"
           label="Title"
           margin="normal"
+          fullWidth
           onChange={handleTitleChange}
           value={title}
         />
@@ -51,6 +52,7 @@ function CreateTask ({ addTask }) {
           id="description"
           label="Description"
           margin="normal"
+          fullWidth
           onChange={handleDescriptionChange}
           value={description}
         />
@@ -59,6 +61,7 @@ function CreateTask ({ addTask }) {
           id="status"
           label="Status"
           margin="normal"
+          fullWidth
           onChange={handleStatusChange}
           value={status}
         />
@@ -67,14 +70,15 @@ function CreateTask ({ addTask }) {
           id="dueDate"
           label="Due Date"
           margin="normal"
+          fullWidth
           onChange={handleDueDateChange}
           value={dueDate}
         />
-      </div>
-      <div>
-        <Button variant="contained" type="submit">
-          Submit
-        </Button> 
+        <div>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button> 
+        </div>
       </div>
     </form>
   )
