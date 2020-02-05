@@ -105,8 +105,7 @@ function CreateTask ({ addTask }) {
   )
 }
 
-// Remove line-through style
-// Don't show COMPLETE button if status = DONE
+// Remove line-through style in Details
 function Task({ task, index, description, status, due_date, completeTask, deleteTask }) {
   const [showDetails, setShowDetails] = useState(false)
     return (
@@ -130,9 +129,12 @@ function Task({ task, index, description, status, due_date, completeTask, delete
               >
                 COMPLETE
               </Button>
-              <h4>Description: {task.description}</h4>
-              <h4>Status: {task.status}</h4>
-              <h4>Due Date: {task.due_date}</h4>
+              <h4>Description:</h4>
+              {task.description}
+              <h4>Status:</h4>
+              {task.status}
+              <h4>Due Date:</h4>
+              {task.due_date}
             </div> 
           : ""}
         </div>
@@ -141,26 +143,7 @@ function Task({ task, index, description, status, due_date, completeTask, delete
 
 export default function Todo() {
   const [showForm, setShowForm] = useState(false)
-  const [tasks, setTasks] = useState([
-      {
-        title: "Eat",
-        description: "Order Pizza",
-        status: "DONE",
-        due_date: "2020-01-31"
-      },
-      {
-        title: "Homework",
-        description: "Read chapters 1-3",
-        status: "DONE",
-        due_date: "2020-01-31"
-      },
-      {
-        title: "Workout",
-        description: "Go to yoga",
-        status: "PENDING",
-        due_date: "2020-02-05"
-      }
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   const addTask = function(title, description, status, due_date) {
     const newTask = [...tasks, {title, description, status, due_date}]
