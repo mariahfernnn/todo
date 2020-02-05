@@ -80,13 +80,27 @@ function CreateTask ({ addTask }) {
 }
 
 // TEST CODE
-function Task({ task }) {
+function Task({ task, index, description, status, due_date, completeTask }) {
+  const [showDetails, setShowDetails] = useState(false)
     return (
         <div
-            className="task"
-            style={{ textDecoration: task.status === "DONE" ? "line-through" : "" }}
+          className="task"
+          style={{ textDecoration: task.status === "DONE" ? "line-through" : "" }}
+          onClick={()=> setShowDetails(true)}
         >
-            {task.title}
+          {task.title}
+          
+        {showDetails ? 
+          <div className="task">
+            <h4>Description: {task.description}</h4>
+            <h4>Status: {task.status}</h4>
+            <h4>Due Date: {task.due_date}</h4>
+            <button variant="contained" onClick={() => completeTask(index)}>
+              Complete
+            </button>
+          </div> 
+          : ""
+        }
         </div>
     );
 }
@@ -137,7 +151,7 @@ export default function Todo() {
               Create
             </Button>
             <Button variant="contained" onClick={() => setShowForm(false)}>
-              Close
+              Back
             </Button>
           </div>
           {showForm ? <CreateTask setShowForm={setShowForm} addTask={addTask} /> : 
