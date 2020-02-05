@@ -30,6 +30,7 @@ function CreateTask ({ addTask }) {
     setStatus(e.target.value)
   }
 
+  // Make date functional later
   const handleDueDateChange = e => {
     setDueDate(e.target.value)
   }
@@ -79,7 +80,7 @@ function CreateTask ({ addTask }) {
   )
 }
 
-// TEST CODE
+// Remove line-through style once completeTask is functional
 function Task({ task, index, description, status, due_date, completeTask }) {
   const [showDetails, setShowDetails] = useState(false)
     return (
@@ -90,17 +91,16 @@ function Task({ task, index, description, status, due_date, completeTask }) {
         >
           {task.title}
           
-        {showDetails ? 
-          <div className="task">
-            <h4>Description: {task.description}</h4>
-            <h4>Status: {task.status}</h4>
-            <h4>Due Date: {task.due_date}</h4>
-            <button variant="contained" onClick={() => completeTask(index)}>
-              Complete
-            </button>
-          </div> 
-          : ""
-        }
+          {showDetails ? 
+            <div className="task">
+              <h4>Description: {task.description}</h4>
+              <h4>Status: {task.status}</h4>
+              <h4>Due Date: {task.due_date}</h4>
+              <button variant="contained" onClick={() => completeTask(index)}>
+                Complete
+              </button>
+            </div> 
+          : ""}
         </div>
     );
 }
@@ -112,19 +112,19 @@ export default function Todo() {
         title: "Eat",
         description: "Order Pizza",
         status: "DONE",
-        due_date: Date("2020-01-31")
+        due_date: "2020-01-31"
       },
       {
         title: "Homework",
         description: "Read chapters 1-3",
         status: "DONE",
-        due_date: Date("2020-01-31")
+        due_date: "2020-01-31"
       },
       {
         title: "Workout",
         description: "Go to yoga",
         status: "PENDING",
-        due_date: Date("2020-02-05")
+        due_date: "2020-02-05"
       }
   ]);
 
@@ -132,6 +132,12 @@ export default function Todo() {
     const newTask = [...tasks, {title, description, status, due_date}]
     setTasks(newTask)
     setShowForm(false)
+  }
+
+  const completeTask = function(index) {
+    const newTask = [...tasks]
+    newTask[index].status = "DONE"
+    setTasks(newTask)
   }
 
   return (
@@ -161,8 +167,9 @@ export default function Todo() {
               task={task}
               index={index}
               key={index}
+              completeTask={completeTask}
               />
-            ))}
+              ))}
           </div>}
       </div>
   );
