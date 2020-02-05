@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import DatePicker from "react-datepicker";
 import './Application.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -95,6 +97,11 @@ function CreateTask ({ addTask }) {
           onChange={handleDueDateChange}
           value={dueDate}
         />
+        {/* <DatePicker
+          placeholderText="Click to select a date"
+          selected={dueDate}
+          onChange={handleDueDateChange}
+        /> */}
       </div>
         <div>
           <Button id="submit" variant="contained" type="submit">
@@ -106,6 +113,7 @@ function CreateTask ({ addTask }) {
 }
 
 // Remove line-through style in Details
+// Another way to show COMPLETE?
 function Task({ task, index, description, status, due_date, completeTask, deleteTask }) {
   const [showDetails, setShowDetails] = useState(false)
     return (
