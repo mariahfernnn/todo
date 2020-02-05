@@ -42,6 +42,22 @@ body {
   float: right;
 }
 
+#add {
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin-left: auto; 
+  padding: auto;
+  border: none;
+  cursor: pointer;
+}
+
+#submit {
+  display: block;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  margin: 0 auto; 
+}
+
 .header {
   display: flex;
   flex-direction: row;

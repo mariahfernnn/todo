@@ -95,12 +95,12 @@ function CreateTask ({ addTask }) {
           onChange={handleDueDateChange}
           value={dueDate}
         />
+      </div>
         <div>
-          <Button variant="contained" type="submit">
-            Submit
+          <Button id="submit" variant="contained" type="submit">
+            SUBMIT
           </Button> 
         </div>
-      </div>
     </form>
   )
 }
@@ -119,10 +119,10 @@ function Task({ task, index, description, status, due_date, completeTask, delete
           {showDetails ? 
             <div className="task">
               <Button id="delete" variant="contained" onClick={() => deleteTask(index)}>
-                Delete
+                DELETE
               </Button>
               <Button id="complete" variant="contained" onClick={() => completeTask(index)}>
-                Complete
+                COMPLETE
               </Button>
               <h4>Description: {task.description}</h4>
               <h4>Status: {task.status}</h4>
@@ -178,7 +178,7 @@ export default function Todo() {
     <div className="todo-container">
           <div className="header">TO DO OR NOT TO DO...
     
-          <Button variant="contained"onClick={()=> setShowForm(true)}>
+          <Button id="add" variant="contained" onClick={()=> setShowForm(true)}>
             +
           </Button>
 
