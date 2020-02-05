@@ -32,8 +32,13 @@ body {
 }
 
 .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin: 0.5em;
-  font-size: 2em;
+  font-size: 1.5em;;
+  font-family: 'Cerebri Sans';
+  font-weight: 700;
   text-align: center;
 }
 
