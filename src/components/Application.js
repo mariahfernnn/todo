@@ -81,7 +81,7 @@ function CreateTask ({ addTask }) {
 }
 
 // Remove line-through style once completeTask is functional
-function Task({ task, index, description, status, due_date, completeTask }) {
+function Task({ task, index, description, status, due_date, completeTask, deleteTask }) {
   const [showDetails, setShowDetails] = useState(false)
     return (
         <div
@@ -93,12 +93,15 @@ function Task({ task, index, description, status, due_date, completeTask }) {
           
           {showDetails ? 
             <div className="task">
+              <Button id="delete" variant="contained" onClick={() => deleteTask(index)}>
+                Delete
+              </Button>
+              <Button id="complete" variant="contained" onClick={() => completeTask(index)}>
+                Complete
+              </Button>
               <h4>Description: {task.description}</h4>
               <h4>Status: {task.status}</h4>
               <h4>Due Date: {task.due_date}</h4>
-              <button variant="contained" onClick={() => completeTask(index)}>
-                Complete
-              </button>
             </div> 
           : ""}
         </div>
@@ -140,9 +143,21 @@ export default function Todo() {
     setTasks(newTask)
   }
 
+  const deleteTask = function(index) {
+    const newTask = [...tasks]
+    newTask.splice(index, 1)
+    setTasks(newTask)
+  }
+
   return (
     <div className="todo-container">
-          <div className="header">THINGS TO DO</div>
+          <div className="header">TO DO OR NOT TO DO...
+    
+          <Button variant="contained"onClick={()=> setShowForm(true)}>
+            +
+          </Button>
+
+          </div>
           {/* <div className="tasks">
               {tasks.map((task, index) => (
                 <Task
@@ -152,14 +167,14 @@ export default function Todo() {
                 />
                 ))}
           </div> */}
-          <div>
+          {/* <div>
             <Button variant="contained" onClick={()=> setShowForm(true)}>
               Create
             </Button>
-            {/* <Button variant="contained" onClick={() => setShowForm(false)}>
+            <Button variant="contained" onClick={() => setShowForm(false)}>
               Back
-            </Button> */}
-          </div>
+            </Button>
+          </div> */}
           {showForm ? 
           <CreateTask setShowForm={setShowForm} addTask={addTask}/> : 
           <div className="tasks">
@@ -168,6 +183,7 @@ export default function Todo() {
               task={task}
               index={index}
               key={index}
+              deleteTask={deleteTask}
               completeTask={completeTask}
               />
             ))}
