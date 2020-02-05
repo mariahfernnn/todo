@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // Create a create new task component
-function CreateTask ({ addTask }) {
+function CreateTask ({ addTask, editTask }) {
   const classes = useStyles()
   
   const [title, setTitle] = useState('')
@@ -113,7 +113,8 @@ function CreateTask ({ addTask }) {
 }
 
 // Remove line-through style in Details
-// Another way to show COMPLETE?
+// Another way to show STATUS?
+// How to manage due dates?
 function Task({ task, index, description, status, due_date, completeTask, deleteTask }) {
   const [showDetails, setShowDetails] = useState(false)
     return (
@@ -159,6 +160,16 @@ export default function Todo() {
     setShowForm(false)
   }
 
+  const editTask = function(title, description, status, due_date, index) {
+    const newTask = [...tasks, {title, description, status, due_date}]
+    newTask[index].title = ""
+    newTask[index].description = ""
+    newTask[index].status = ""
+    newTask[index].due_date = ""
+    setTasks(newTask)
+
+  }
+
   const completeTask = function(index) {
     const newTask = [...tasks]
     newTask[index].status = "DONE"
@@ -186,6 +197,7 @@ export default function Todo() {
               task={task}
               index={index}
               key={index}
+              editTask={editTask}
               deleteTask={deleteTask}
               completeTask={completeTask}
               />
