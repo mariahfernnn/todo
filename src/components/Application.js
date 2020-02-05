@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import './Application.css';
+
+const useStyles = makeStyles(theme => ({
+  input: {
+    color: "white"
+  }
+}));
 
 // Create a create new task component
 function CreateTask ({ addTask }) {
+  const classes = useStyles()
+  
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('PENDING')
@@ -36,7 +45,7 @@ function CreateTask ({ addTask }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} noValidate autoComplete="off">
       <div className="create-task">
         <TextField
           required
@@ -44,6 +53,9 @@ function CreateTask ({ addTask }) {
           label="Title"
           margin="normal"
           fullWidth
+          InputProps={{
+            className: classes.input,
+          }}
           onChange={handleTitleChange}
           value={title}
         />
@@ -53,6 +65,9 @@ function CreateTask ({ addTask }) {
           label="Description"
           margin="normal"
           fullWidth
+          InputProps={{
+            className: classes.input,
+          }}
           onChange={handleDescriptionChange}
           value={description}
         />
@@ -62,6 +77,9 @@ function CreateTask ({ addTask }) {
           label="Status"
           margin="normal"
           fullWidth
+          InputProps={{
+            className: classes.input,
+          }}
           onChange={handleStatusChange}
           value={status}
         />
@@ -71,6 +89,9 @@ function CreateTask ({ addTask }) {
           label="Due Date"
           margin="normal"
           fullWidth
+          InputProps={{
+            className: classes.input,
+          }}
           onChange={handleDueDateChange}
           value={dueDate}
         />
