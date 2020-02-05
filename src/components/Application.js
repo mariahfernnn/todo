@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import './Application.css';
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -24,6 +24,12 @@ function CreateTask ({ addTask, editTask }) {
   const handleSubmit = function(evt) {
     evt.preventDefault()
     addTask(title, description, status, dueDate)
+  }
+
+  // Modify - not working
+  const handleUpdate = function(evt) {
+    evt.preventDefault()
+    editTask(title, description, status, dueDate)
   }
 
   const handleTitleChange = e => {
@@ -47,7 +53,7 @@ function CreateTask ({ addTask, editTask }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate autoComplete="off">
+    <form onSubmit={handleSubmit} onUpdate={handleUpdate} noValidate autoComplete="off">
       <div className="create-task">
         <TextField
           required
@@ -115,8 +121,11 @@ function CreateTask ({ addTask, editTask }) {
 // Remove line-through style in Details
 // Another way to show STATUS?
 // How to manage due dates?
-function Task({ task, index, description, status, due_date, completeTask, deleteTask }) {
+// Existing task component
+function Task({ task, index, description, status, due_date, addTask, completeTask, deleteTask, editTask }) {
   const [showDetails, setShowDetails] = useState(false)
+  // const [showForm, setShowForm] = useState(false)
+
     return (
         <div
           className="task"
@@ -127,6 +136,9 @@ function Task({ task, index, description, status, due_date, completeTask, delete
           
           {showDetails ? 
             <div className="task">
+              <Button id="delete" variant="contained" onClick={() => editTask(index)}>
+                EDIT
+              </Button>
               <Button id="delete" variant="contained" onClick={() => deleteTask(index)}>
                 DELETE
               </Button>
@@ -145,6 +157,7 @@ function Task({ task, index, description, status, due_date, completeTask, delete
               <h4>Due Date:</h4>
               {task.due_date}
             </div> 
+
           : ""}
         </div>
     );
@@ -160,13 +173,11 @@ export default function Todo() {
     setShowForm(false)
   }
 
+  // Modify - not working
   const editTask = function(title, description, status, due_date, index) {
     const newTask = [...tasks, {title, description, status, due_date}]
-    newTask[index].title = ""
-    newTask[index].description = ""
-    newTask[index].status = ""
-    newTask[index].due_date = ""
-    setTasks(newTask)
+    setTasks(newTask[index])
+    setShowForm(false)
 
   }
 
@@ -190,7 +201,7 @@ export default function Todo() {
             </Button>
           </div>
           {showForm ? 
-          <CreateTask setShowForm={setShowForm} addTask={addTask}/> : 
+          <CreateTask setShowForm={setShowForm} addTask={addTask} editTask={editTask}/> : 
           <div className="tasks">
             {tasks.map((task, index) => (
               <Task
