@@ -50,7 +50,7 @@ function CreateTask ({ addTask }) {
         <TextField
           required
           id="title"
-          label="Title"
+          label="TITLE"
           margin="normal"
           fullWidth
           InputProps={{
@@ -62,7 +62,7 @@ function CreateTask ({ addTask }) {
         <TextField
           required
           id="description"
-          label="Description"
+          label="DESCRIPTION"
           margin="normal"
           fullWidth
           InputProps={{
@@ -74,7 +74,7 @@ function CreateTask ({ addTask }) {
         <TextField
           required
           id="status"
-          label="Status"
+          label="STATUS"
           margin="normal"
           fullWidth
           InputProps={{
@@ -86,7 +86,7 @@ function CreateTask ({ addTask }) {
         <TextField
           required
           id="dueDate"
-          label="Due Date"
+          label="DUE DATE (YY/MM/DD)"
           margin="normal"
           fullWidth
           InputProps={{
@@ -105,7 +105,8 @@ function CreateTask ({ addTask }) {
   )
 }
 
-// Remove line-through style once completeTask is functional
+// Remove line-through style
+// Don't show COMPLETE button if status = DONE
 function Task({ task, index, description, status, due_date, completeTask, deleteTask }) {
   const [showDetails, setShowDetails] = useState(false)
     return (
@@ -121,7 +122,12 @@ function Task({ task, index, description, status, due_date, completeTask, delete
               <Button id="delete" variant="contained" onClick={() => deleteTask(index)}>
                 DELETE
               </Button>
-              <Button id="complete" variant="contained" onClick={() => completeTask(index)}>
+              <Button 
+                id="complete" 
+                variant="contained" 
+                style={{ visibility: task.status === "DONE" ? "hidden" : "" }}
+                onClick={() => completeTask(index)}
+              >
                 COMPLETE
               </Button>
               <h4>Description: {task.description}</h4>
