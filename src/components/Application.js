@@ -177,29 +177,10 @@ export default function Todo() {
   return (
     <div className="todo-container">
           <div className="header">TO DO OR NOT TO DO...
-    
-          <Button id="add" variant="contained" onClick={()=> setShowForm(true)}>
-            +
-          </Button>
-
+            <Button id="add" variant="contained" onClick={()=> setShowForm(true)}>
+              +
+            </Button>
           </div>
-          {/* <div className="tasks">
-              {tasks.map((task, index) => (
-                <Task
-                task={task}
-                index={index}
-                key={index}
-                />
-                ))}
-          </div> */}
-          {/* <div>
-            <Button variant="contained" onClick={()=> setShowForm(true)}>
-              Create
-            </Button>
-            <Button variant="contained" onClick={() => setShowForm(false)}>
-              Back
-            </Button>
-          </div> */}
           {showForm ? 
           <CreateTask setShowForm={setShowForm} addTask={addTask}/> : 
           <div className="tasks">
