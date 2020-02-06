@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import DatePicker from "react-datepicker";
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
+// import DatePicker from "react-datepicker";
 import moment from 'moment';
-// import format from "date-fns/format";
 import './Application.css';
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
+
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -43,7 +45,6 @@ function CreateTask ({ addTask }) {
     setStatus(e.target.value)
   }
 
-  // Make date functional later
   const handleDueDateChange = value => {
     setDueDate(value)
   }
@@ -99,12 +100,26 @@ function CreateTask ({ addTask }) {
           onChange={handleDueDateChange}
           value={dueDate}
         /> */}
-        <DatePicker
-          placeholderText="Click to select a date"
+        {/* <DatePicker
+          required
+          title="DUE DATE"
+          placeholderText="Select due date"
           selected={dueDate}
           onChange={handleDueDateChange}
           dateFormat="MMMM d, yyyy"
-        />
+        /> */}
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <DatePicker
+            label="DUE DATE"
+            fullWidth
+            InputProps={{
+              className: classes.input,
+            }}
+            value={dueDate}
+            onChange={handleDueDateChange}
+            animateYearScrolling
+          />
+        </MuiPickersUtilsProvider>
       </div>
         <div>
           <Button id="submit" variant="contained" type="submit">
@@ -155,7 +170,7 @@ function Task({ task, index, completeTask, deleteTask }) {
           <h4>Status:</h4>
           {task.status}
           <h4>Due Date:</h4>
-          {moment(task.due_date).format('MMM Do YY')}
+          {moment(task.due_date).format('MMM Do YYYY')}
         </div> 
       : ""}
     </div>
