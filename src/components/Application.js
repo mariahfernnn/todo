@@ -4,11 +4,9 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
-// import DatePicker from "react-datepicker";
+import { Alert } from '@material-ui/lab';
 import moment from 'moment';
 import './Application.css';
-// import "react-datepicker/dist/react-datepicker.css";
-
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -110,6 +108,7 @@ function CreateTask ({ addTask }) {
         /> */}
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <DatePicker
+            required
             label="DUE DATE"
             fullWidth
             InputProps={{
@@ -133,8 +132,11 @@ function CreateTask ({ addTask }) {
 // Remove line-through style in Details
 // Another way to show STATUS?
 // How to manage due dates?
+
 // Existing task component
 function Task({ task, index, completeTask, deleteTask }) {
+  const classes = useStyles()
+
   const [showDetails, setShowDetails] = useState(false)
   // const [showForm, setShowForm] = useState(false)
 
@@ -166,11 +168,16 @@ function Task({ task, index, completeTask, deleteTask }) {
             COMPLETE
           </Button>
           <h4>Description:</h4>
-          {task.description}
+            {task.description}
           <h4>Status:</h4>
-          {task.status}
+            {task.status}
           <h4>Due Date:</h4>
-          {moment(task.due_date).format('MMM Do YYYY')}
+          {/* {moment(task.due_date).format('MMM Do YYYY')} */}
+            {moment(task.due_date).format('MMM Do YYYY') === moment().format('MMM Do YYYY') ?
+            <div className={classes.root}>
+              <Alert severity="error">This is due!</Alert>
+            </div> 
+            : moment(task.due_date).format('MMM Do YYYY')}
         </div> 
       : ""}
     </div>
@@ -218,11 +225,11 @@ export default function Todo() {
         <div className="tasks">
           {tasks.map((task, index) => (
             <Task
-            task={task}
-            index={index}
-            key={index}
-            deleteTask={deleteTask}
-            completeTask={completeTask}
+              task={task}
+              index={index}
+              key={index}
+              deleteTask={deleteTask}
+              completeTask={completeTask}
             />
           ))}
         </div>}
