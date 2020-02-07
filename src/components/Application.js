@@ -125,20 +125,14 @@ function CreateTask ({ addTask }) {
             SUBMIT
           </Button> 
         </div>
-    </form>
-  )
-}
-
-// Remove line-through style in Details
-// Another way to show STATUS?
-// How to manage due dates?
+    </form> 
+    )
+  }
 
 // Existing task component
 function Task({ task, index, completeTask, deleteTask }) {
   const classes = useStyles()
-
   const [showDetails, setShowDetails] = useState(false)
-  // const [showForm, setShowForm] = useState(false)
 
   return (
     <div
@@ -155,7 +149,7 @@ function Task({ task, index, completeTask, deleteTask }) {
           <Button 
             id="delete" 
             variant="contained" 
-            onClick={() => {deleteTask(index); setShowDetails(false)}}
+            onClick={() => {deleteTask(index)}}
           >
             DELETE
           </Button>
