@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// Create a create new task component
+// Create new task component
 function CreateTask ({ addTask }) {
   const classes = useStyles()
   
@@ -38,7 +38,6 @@ function CreateTask ({ addTask }) {
 
   // Status can either be PENDING or DONE
   // Changed initial state to PENDING
-  // Make it a dropdown later
   const handleStatusChange = e => {
     setStatus(e.target.value)
   }
@@ -86,26 +85,6 @@ function CreateTask ({ addTask }) {
           onChange={handleStatusChange}
           value={status}
         />
-        {/* <TextField
-          required
-          id="dueDate"
-          label="DUE DATE (YY/MM/DD)"
-          margin="normal"
-          fullWidth
-          InputProps={{
-            className: classes.input,
-          }}
-          onChange={handleDueDateChange}
-          value={dueDate}
-        /> */}
-        {/* <DatePicker
-          required
-          title="DUE DATE"
-          placeholderText="Select due date"
-          selected={dueDate}
-          onChange={handleDueDateChange}
-          dateFormat="MMMM d, yyyy"
-        /> */}
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <DatePicker
             required
@@ -141,11 +120,9 @@ function Task({ task, index, completeTask, deleteTask }) {
       onClick={() => setShowDetails(true)}
     >
       {task.title}
+
       {showDetails ? 
         <div className="task">
-          {/* <Button id="delete" variant="contained" onClick={() => editTask(index)}>
-            EDIT
-          </Button> */}
           <Button 
             id="delete" 
             variant="contained" 
@@ -157,8 +134,7 @@ function Task({ task, index, completeTask, deleteTask }) {
             id="complete" 
             variant="contained" 
             style={{ visibility: task.status === "DONE" ? "hidden" : "" }}
-            // onClick={() => completeTask(index)}
-            onClick={() => {completeTask(index); setShowDetails(false)}}
+            onClick={() => {completeTask(index)}}
           >
             COMPLETE
           </Button>
@@ -173,7 +149,8 @@ function Task({ task, index, completeTask, deleteTask }) {
             </div> 
             : moment(task.due_date).format('MMM Do YYYY')}
         </div> 
-      : ""}
+        : ""
+      }
     </div>
   );
 }
