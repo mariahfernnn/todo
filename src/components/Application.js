@@ -145,7 +145,7 @@ function Task({ task, index, completeTask, deleteTask }) {
           <h4>Due Date:</h4>
             {moment(task.due_date).format('MMM Do YYYY') === moment().format('MMM Do YYYY') && task.status === "PENDING" ?
             <div className={classes.root}>
-              <Alert severity="error">This is due!</Alert>
+              <Alert severity="error">THIS IS DUE!</Alert>
             </div> 
             : moment(task.due_date).format('MMM Do YYYY')}
         </div> 
