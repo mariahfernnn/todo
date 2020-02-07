@@ -75,3 +75,11 @@ body {
   padding: 0.5em;
   margin: 0.5em;
 }
+
+.MuiToolbar-root {
+  background-color: rgb(51, 197, 213) !important;
+}
+
+.MuiPickersDay-daySelected {
+  background-color: rgb(51, 197, 213) !important;
+}

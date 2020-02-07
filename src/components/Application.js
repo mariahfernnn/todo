@@ -163,7 +163,8 @@ function Task({ task, index, completeTask, deleteTask }) {
             id="complete" 
             variant="contained" 
             style={{ visibility: task.status === "DONE" ? "hidden" : "" }}
-            onClick={() => completeTask(index)}
+            // onClick={() => completeTask(index)}
+            onClick={() => {completeTask(index); setShowDetails(false)}}
           >
             COMPLETE
           </Button>
@@ -172,7 +173,6 @@ function Task({ task, index, completeTask, deleteTask }) {
           <h4>Status:</h4>
             {task.status}
           <h4>Due Date:</h4>
-          {/* {moment(task.due_date).format('MMM Do YYYY')} */}
             {moment(task.due_date).format('MMM Do YYYY') === moment().format('MMM Do YYYY') ?
             <div className={classes.root}>
               <Alert severity="error">This is due!</Alert>
