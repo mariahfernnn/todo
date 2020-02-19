@@ -163,15 +163,8 @@ export default function Todo() {
   const addTask = function(title, description, status, due_date) {
     const newTask = [...tasks, {title, description, status, due_date}]
     setTasks(newTask)
-    console.log("What is the new task?", newTask)
     setShowForm(false)
   }
-
-  // const editTask = function(evt, index) {
-  //   const newTask = [...tasks]
-  //   newTask[index].title = evt.target.value
-  //   setTasks(newTask)
-  // }
 
   const completeTask = function(index) {
     const newTask = [...tasks]
