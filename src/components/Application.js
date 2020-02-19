@@ -116,10 +116,11 @@ function Task({ task, index, completeTask, deleteTask }) {
   return (
     <div
       className="task"
-      style={{ textDecoration: task.status === "DONE" ? "line-through" : "" }}
       onClick={() => setShowDetails(true)}
     >
-      {task.title}
+      <div style={{ textDecoration: task.status === "DONE" ? "line-through" : "" }}>
+        {task.title}
+      </div>
 
       {showDetails ? 
         <div className="task">
